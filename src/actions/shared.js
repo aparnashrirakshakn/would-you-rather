@@ -1,7 +1,7 @@
 import { getInitialData } from '../utils/api'
 import { receiveUsers } from '../actions/users'
 import { receiveQuestions } from '../actions/questions'
-import { setAuthenticatedUser } from '../actions/authedUser'
+import { setAuthenticatedUser } from '../actions/authenticatedUser'
 
 const AUTHENTICATED_ID = 'tylermcginnis'
 
