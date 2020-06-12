@@ -4,6 +4,7 @@ import {
     _saveQuestion,
     _saveQuestionAnswer
   } from './_DATA.js'
+import { isObject } from './helpers.js'
 
 function flattenQuestion (question) {
     return Object.keys(question)
