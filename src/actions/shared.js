@@ -6,12 +6,12 @@ import { setAuthenticatedUser } from '../actions/authenticatedUser'
 const AUTHENTICATED_ID = 'tylermcginnis'
 
 export function handleInitialData () {
-    return (dispatch) => {
-        return getInitialData()
-            .then(({users, questions}) => {
-                dispatch(receiveUsers(users))
-                dispatch(receiveQuestions(questions))
-                dispatch(setAuthenticatedUser(AUTHENTICATED_ID))
-            })
-    }
+  return (dispatch) => {
+    return getInitialData()
+      .then(({ users, questions }) => {
+        dispatch(receiveUsers(users))
+        dispatch(receiveQuestions(questions))
+        dispatch(setAuthenticatedUser(AUTHENTICATED_ID))
+      })
+  }
 }
