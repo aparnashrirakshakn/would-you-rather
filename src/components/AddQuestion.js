@@ -32,7 +32,7 @@ class AddQuestion extends Component {
             <form className='add-form' onSubmit = {this.handleSubmit}>
                 <h3 style={{marginBottom: 5}}>Would you rather</h3>
                 <input
-                    id='first-option'
+                    id='option-one'
                     value={optionOneText}
                     onChange={this.handleInputChange}
                     name='optionOneText'
@@ -41,7 +41,7 @@ class AddQuestion extends Component {
                 />
                 <span>or</span>
                 <input
-                    id='second-option'
+                    id='option-two'
                     value={optionTwoText}
                     onChange={this.handleInputChange}
                     name='optionTwoText'
