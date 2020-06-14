@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleAddQuestion } from '../actions/questions'
 
 class AddQuestion extends Component {
     state = {
@@ -23,6 +25,7 @@ class AddQuestion extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log('Add Question: ',this.state)
+        this.props.dispatch(handleAddQuestion(this.state))
     }
 
     render() {
@@ -56,4 +59,4 @@ class AddQuestion extends Component {
     }
 }
 
-export default AddQuestion
+export default connect()(AddQuestion)
