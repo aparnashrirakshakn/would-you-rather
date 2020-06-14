@@ -61,5 +61,6 @@ export function saveQuestion (question) {
 }
 
 export function saveQuestionAnswer (args) {
+  console.log(args);
   return _saveQuestionAnswer(args)
 }
