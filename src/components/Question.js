@@ -90,7 +90,7 @@ function mapStateToProps ({ authenticatedUser, questions, users}, { match }) {
 
   const vote = getVoteKeys().reduce((vote, key) => {
     if (vote !== null) {
-      return vote[0]
+      return vote
     }
 
     return question[key].includes(authenticatedUser)
