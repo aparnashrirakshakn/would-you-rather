@@ -32,29 +32,39 @@ class AddQuestion extends Component {
         const { optionOneText, optionTwoText } = this.state
 
         return(
-            <form className='add-form' onSubmit = {this.handleSubmit}>
-                <h3 style={{marginBottom: 5}}>Would you rather</h3>
-                <input
-                    id='option-one'
-                    value={optionOneText}
-                    onChange={this.handleInputChange}
-                    name='optionOneText'
-                    className='input'
-                    type='text'
-                />
-                <span>or</span>
-                <input
-                    id='option-two'
-                    value={optionTwoText}
-                    onChange={this.handleInputChange}
-                    name='optionTwoText'
-                    className='input'
-                    type='text'
-                />
-                <button className='btn' type='Submit' disabled={this.isDisabled()}>
-                    Submit
-                </button>
+            <form className='add-form col-sm-12 col-md-6' onSubmit = {this.handleSubmit}>
+                <div className="card">
+                    <div className="card-header">
+                        Create a New Question
+                    </div>
+                    <div className="card-body new-question-container">
+                        <h5><b>Would you rather</b></h5>
+                        <input
+                            id='option-one'
+                            value={optionOneText}
+                            onChange={this.handleInputChange}
+                            name='optionOneText'
+                            className='input'
+                            type='text'
+                        />
+                        <span>or</span>
+                        <input
+                            id='option-two'
+                            value={optionTwoText}
+                            onChange={this.handleInputChange}
+                            name='optionTwoText'
+                            className='input'
+                            type='text'
+                        />
+                        <span><b>?</b></span>
+                        <button className='add-button col-12' type='Submit' disabled={this.isDisabled()}>
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </form>
+
+            
         )
     }
 }

@@ -18,3 +18,5 @@ export function handleInitialData () {
       })
   }
 }
+
+export default AUTHENTICATED_ID
