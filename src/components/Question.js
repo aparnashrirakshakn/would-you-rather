@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPercentage } from '../utils/helpers'
+import { getPercentage, getVotedIndicator } from '../utils/helpers'
 import { handleAnswer, handleAddAnswer } from '../actions/answers'
+import indicator from '../utils/indicator.png'
 
 const getVoteKeys = () => ['optionOneVotes', 'optionTwoVotes']
 
@@ -28,36 +29,50 @@ class Question extends Component {
     const totalVotes = getVoteKeys().reduce((total, key) => total + question[key].length, 0)
 
     return (
-      <div className='poll-container'>
-        <h1>
-          Would you rather
-        </h1>
-        <div className='poll-author'>
-          By <img arc={authorAvatar} alt="Author's Avatar" />
+      <div className="user-question-container">
+        <div className="card col-8 pl-0 pr-0">
+            <div className="card-header">
+              <span>{question.author} asks...</span>
+            </div>
+            <div className="card-body col-12 pl-0 pr-0">
+                <div className="avatar-container col-3">
+                  <img src={authorAvatar} alt="Author's Avatar" />
+                </div>
+                <div className="question-container col-9">
+                    <h4>Would you rather</h4>
+                    <ul>
+                      {['optionOneText', 'optionTwoText'].map((key) => {
+                        const count = question[key.slice(0,-4) + 'Votes'].length
+                        return(
+                          <li key={key}
+                          onClick = {() => {
+                            if(vote === null && !this.answered) {
+                              this.handleAnswer(key.slice(0,-4))
+                            }
+                          }} 
+                            className={`option ${vote === key.slice(0,-4)+'Votes' ? 'chosen' : ''}`}>
+                            {vote === null ?
+                              question[key]
+                            : <div className='result'>
+                                {getVotedIndicator(vote, key.slice(0,-4)+'Votes') && 
+                                    <div className='vote-indicator'>
+                                      <img src={indicator} alt="Your Vote" className='mr-4 mb-2'/>
+                                      <span>Your vote</span>
+                                    </div>
+                                }
+                                <span>{question[key]}</span>
+                                <span className='percentage-span'>
+                                  {getPercentage(count, totalVotes)}%
+                                </span>
+                              </div>}
+                          </li>
+                        )
+                        })
+                      }
+                    </ul>
+                </div>
+            </div>
         </div>
-        <ul>
-          {['optionOneText', 'optionTwoText'].map((key) => {
-            const count = question[key.slice(0,-4) + 'Votes'].length
-            console.log("VOTE: ",vote)
-            return(
-              <li key={key}
-              onClick = {() => {
-                if(vote === null && !this.answered) {
-                  this.handleAnswer(key.slice(0,-4))
-                }
-              }} 
-                className={`option ${vote === key.slice(0,-4) ? 'chosen' : ''}`}>
-                {vote === null ?
-                  question[key]
-                : <div className='result'>
-                    <span>{question[key]}</span>
-                    {<span>{getPercentage(count, totalVotes)}%</span>}
-                  </div>}
-              </li>
-            )
-            })
-          }
-        </ul>
       </div>
     )
   }

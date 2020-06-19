@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+
 class Dashboard extends Component {
   state = {
     showAnswered: false
@@ -18,7 +19,7 @@ class Dashboard extends Component {
   }
   render() {
     const { showAnswered } = this.state
-    const { answered, unanswered } = this.props
+    const { answered, unanswered, users } = this.props
 
     const list = showAnswered === true
       ? answered
@@ -42,10 +43,24 @@ class Dashboard extends Component {
         <ul className='dashboard-list'>
           {list.map((question) => (
             <li key={question.id}>
-              <Link to={`questions/${question.id}`}>
-                {question.optionOneText}
-                {question.optionTwoText}
-              </Link>
+              <div className="card dashboard-card">
+                <div className="card-header">
+                    {question.author} asks:
+                </div>
+                <div className="card-body">
+                    <div className="avatar-container">
+                        <img src={users[question.author].avatarURL} />
+                    </div>
+                    <div className="information-container">
+                        <h5 className="card-title"><b>Would you rather</b></h5>
+                        <p className="card-text">{question.optionOneText} or ...</p>
+                        <Link to={`questions/${question.id}`}>
+                          <button className="poll-button">View Poll</button>
+                        </Link>
+                    </div>
+                </div>
+              </div>
+              
             </li>
           ))}
         </ul>
@@ -66,10 +81,10 @@ function mapStateToProps ({ authenticatedUser, questions, users }) {
     .map((id) => questions[id])
     .sort((a,b) => b.timestamp - a.timestamp)
 
-
   return {
     answered,
-    unanswered
+    unanswered,
+    users
   }
 }
 

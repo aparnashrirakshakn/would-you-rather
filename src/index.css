@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,12 +32,12 @@ a {
 }
 
 .option:hover {
-  border: 2px solid #252525;
+  border: 2px solid #55A846;
   cursor: pointer;
 }
 
 .chosen {
-  border: 2px solid #00b5d6;
+  border: 3px solid #55A846;
 }
 
 .result {
@@ -86,14 +91,30 @@ a {
   font-weight: bold;
 }
 
-.nav ul {
+.menu {
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: 3px solid #55A846;
+}
+
+
+.menu, .menu ul {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   text-decoration: none;
 }
 
-.nav li:first-child {
+@media (max-width: 500px) {
+  .menu, .menu ul {
+    width: 95%;
+    flex-direction: column;
+  }
+}
+
+.menu li:first-child {
   padding-left: 0;
 }
 
@@ -102,8 +123,12 @@ ul {
 }
 
 li {
+  display: flex;
+  justify-content: center;
   list-style-type: none;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
   text-decoration: none;
 }
 
@@ -127,6 +152,19 @@ li {
 
 .dashboard-list a:hover {
   font-weight: 600;
+}
+
+@media (max-width: 500px) {
+  .dashboard-card .card-body {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard-card button {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .add-poll-container {
@@ -184,7 +222,6 @@ li {
 
 .add-form {
   margin: 0 auto;
-  width: 600px;
 }
 
 input {
@@ -198,17 +235,6 @@ input {
   margin-bottom: 20px;
 }
 
-.btn {
-  text-transform: uppercase;
-  margin: 35px auto;
-  padding: 10px;
-  border: 1px solid rgba(0,0,0,.29);
-  cursor: pointer;
-  background: #fff;
-  font-size: 16px;
-  width: 250px;
-  position: relative;
-}
 
 .label {
   display: block;
@@ -227,3 +253,157 @@ input {
 .input:focus {
   border-color: gray;
 }
+
+.card-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.avatar-container {
+  padding-right: 1rem;
+}
+
+.avatar-container img {
+  width: 124px;
+  height: 124px;
+}
+
+.information-container {
+  border-left: 2px solid #f7f7f7;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.user-information-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+}
+
+.score-container {
+  border-left: 2px solid #f7f7f7;
+  padding-left: 2rem;
+}
+
+.score-container .card {
+  width: 6rem;
+}
+
+.score-container .card-body {
+  display: flex;
+  justify-content: center;
+}
+
+.new-question-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-question-container input {
+  margin: 1rem;
+  border-radius: 0.5rem;
+}
+
+.question-container {
+  border-left: 2px solid #f7f7f7;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-question-container {
+  display: flex;
+  justify-content: center;
+}
+
+.poll-button, .results-button {
+  padding-left: 7rem;
+  padding-right: 7rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.poll-button {
+  background-color: #55A846;
+}
+
+.add-button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #55A846;
+  margin-top: 0.5rem;
+}
+
+.results-button {
+  background-color: #48A3B8;
+}
+
+.logout-button {
+  padding-left: 4rem;
+  padding-right: 5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  color: #55A846;
+  border: 2px solid #55A846;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+
+.logout-button:hover {
+  color: #fff;
+  background-color: #55A846;
+}
+
+.badge {
+  width: 48px;
+  height: 48px;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+}
+
+.gold {
+  border-left: 15px solid gold;
+}
+
+.silver {
+  border-left: 15px solid silver;
+}
+
+.bronze {
+  border-left: 15px solid #cd7f32;
+}
+
+.percentage-span {
+  padding-left: 1rem;
+}
+
+.vote-indicator {
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-indicator span {
+  color: #55A846;
+  font-weight: bolder;
+}
+
+@media (max-width: 500px) {
+  .leaderboard-card .card-body {
+    flex-direction: column;
+  }
+}
+

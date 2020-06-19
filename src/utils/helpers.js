@@ -5,3 +5,7 @@ export function isObject (item) {
 export function getPercentage (count, total) {
   return total === 0 ? 0 : parseInt(count / total * 100, 10)
 }
+
+export function getVotedIndicator (vote, key) {
+  return vote === key;
+}

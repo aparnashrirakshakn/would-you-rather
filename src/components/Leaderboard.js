@@ -1,22 +1,51 @@
 import React  from 'react'
 import { connect } from 'react-redux'
-
 function Leaderboard({ users }) {
-    console.log(users)
     return (
         <ul>
-            {users.map((user) => (
-                <li className='user' key={user.id}>
-                    <img src={user.avatarURL} alt={`Avatar for ${user.name}`} />
-                    <div>
-                        <h1>{user.name}</h1>
-                        <p>{user.questions} Questions</p>
-                        <p>{user.answers} Answers</p>
+            {users.map((user, idx) => (
+                <li key={user.id}>
+                    <div className={"leaderboard-card card col-sm-12 col-md-8 pl-0 pr-0 " + getMedalColor(idx)}>
+                        <div className="card-body col-12 pt-2 pb-2">
+                            <div className="avatar-container col-sm-12 col-md-3">
+                                <img src={process.env.PUBLIC_URL + user.avatarURL} />
+                            </div>
+                            <div className="user-information-container col-sm-12 col-md-6">
+                                <h4>{user.name}</h4>
+                                <p>{user.questions} Questions</p>
+                                <p>{user.answers} Answers</p>
+                            </div>
+                            <div className="score-container col-sm-12 col-md-3">
+                                <div className="card">
+                                    <div className="card-header">
+                                        Score
+                                    </div>
+                                    <div className="card-body">
+                                    <span className="badge badge-pill badge-success">{user.questions+user.answers}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
             ))}
         </ul>
     )
+}
+
+function getMedalColor(idx) {
+    if(idx === 0) {
+        return 'gold'
+    }
+    else if(idx === 1) {
+        return 'silver'
+    }
+    else if(idx === 2) {
+        return 'bronze'
+    }
+    else {
+        return ''
+    }
 }
 
 function mapStateToProps ({ users }) {
@@ -32,8 +61,7 @@ function mapStateToProps ({ users }) {
                     questions: questions.length,
                     answers: answers.length
                 }
-            })
-            .sort ((a,b) => b.questions + b.answers > a.questions + a.answers)
+            }).sort ((a,b) => (b.questions + b.answers) - (a.questions + a.answers))
     }
 }
 
