@@ -2,20 +2,24 @@ import React, { Component } from 'react'
 import team from '../utils/team.png'
 import { setAuthenticatedUser } from '../actions/authenticatedUser'
 import { connect } from "react-redux"
+import { Redirect } from 'react-router'
 
 class Signin extends Component {
 
   state = {
     selectedUser: ''
   }
-
+  
   handleSignin = (e) => {
     e.preventDefault();
     const selectedUserId = this.state.selectedUser
-    
+
     new Promise((res, rej) => {
       setTimeout(() => res(), 500);
-    }).then(() => this.props.dispatch(setAuthenticatedUser(selectedUserId)));
+    }).then(() => {
+      this.props.dispatch(setAuthenticatedUser(selectedUserId))
+    });
+    
   }
 
   handleInputChange = (e) => {
@@ -26,6 +30,7 @@ class Signin extends Component {
   }
 
   render() {
+
       return(
       <div className='sign-in-container'>
         <div className="card col-12 col-md-6 pl-0 pr-0 sign-in-card">
@@ -38,6 +43,7 @@ class Signin extends Component {
               <div className="form-group">
                 <label htmlFor="sign-in-select"><b>Sign in as</b></label>
                 <select className="form-control" onChange={this.handleInputChange} id="sign-in-select">
+                  <option>Select User</option>
                   <option>sarahedo</option>
                   <option>tylermcginnis</option>
                   <option>johndoe</option>

@@ -9,7 +9,6 @@ import AddQuestion from './AddQuestion'
 import Question from './Question'
 import Menu from './Menu'
 import { BrowserRouter, Route } from 'react-router-dom'
-import AUTHENTICATED_ID from '../actions/shared';
 
 class App extends Component {
   componentDidMount () {
@@ -21,17 +20,17 @@ class App extends Component {
         <div>
           <LoadingBar />
           <div className = 'container'>
-            {!AUTHENTICATED_ID &&
+            {!this.props.authenticatedUser &&
               <Route path='/' exact component={Signin} />
             }
 
-            {AUTHENTICATED_ID &&
+            {this.props.authenticatedUser &&
               <div>
-                <Menu />
+                <Menu authenticatedUser={this.props.authenticatedUser}/>
                 {this.props.loading === true
                   ? null
                   : <div>
-                      <Route path='/home' component={Dashboard} />
+                      <Route path='/' exact component={Dashboard} />
                       <Route path='/leaderboard' component={Leaderboard} />
                       <Route path='/questions/:id' component={Question} />
                       <Route path='/add' component={AddQuestion} />
@@ -49,7 +48,8 @@ class App extends Component {
 
 function mapStateToProps ({ authenticatedUser }) {
   return {
-    loading: authenticatedUser === null
+    loading: authenticatedUser === null,
+    authenticatedUser
   }
 }
 
