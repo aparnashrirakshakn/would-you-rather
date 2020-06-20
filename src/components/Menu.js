@@ -1,89 +1,75 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import AUTHENTICATED_ID from '../actions/shared'
+import { setAuthenticatedUser } from '../actions/authenticatedUser'
+import { connect } from "react-redux"
+import { Redirect } from 'react-router'
 
-export default function Menu() {
-    return(
-        <div>
+class Menu extends Component {
+
+    state = {
+        navigate : false
+    }
+
+    handleSignOut = (e) => {
+        e.preventDefault();
+        const selectedUserId = ''
+
+        new Promise((res, rej) => {
+            setTimeout(() => res(), 500);
+        }).then(() => {
+            this.props.dispatch(setAuthenticatedUser(selectedUserId))
+        });
+        this.setState({
+            navigate: true
+        })
+    }
+
+    render() {
+        const { navigate } = this.state
+
+        if (navigate) {
+            return <Redirect to='/' push={true} />
+        }
+
+        return (
             <nav className='menu'>
-                <div>
-                    <ul>
-                        <li>
-                            <NavLink to='/' exact activeClassName='active'>
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/leaderboard' exact activeClassName='active'>
-                                Leaderboard
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/add' exact activeClassName='active'>
-                                Add Question
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-                <div>
+            <div>
                 <ul>
                     <li>
-                        Hello, {AUTHENTICATED_ID}!
+                        <NavLink to='/' exact activeClassName='active'>
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <button className="logout-button">Logout </button>
+                        <NavLink to='/leaderboard' exact activeClassName='active'>
+                            Leaderboard
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/add' exact activeClassName='active'>
+                            Add Question
+                        </NavLink>
                     </li>
                 </ul>
-                </div>
-            </nav>
-
-            {/* <div className="card">
-                <div className="card-header">
-                    Tyler asks:
-                </div>
-                <div className="card-body">
-                    <div className="avatar-container">
-                        <img src={tyler} height="124px" width="124px" alt="author avatar" />
-                    </div>
-                    <div className="question-container">
-                        <h5 className="card-title"><b>Would you rather</b></h5>
-                        <p className="card-text">Learn React or ...</p>
-                        <button className="poll-button">View Poll</button>
-                    </div>
-                </div>
             </div>
-
-            <div className="card">
-                <div className="card-header">
-                    Sarah asks:
-                </div>
-                <div className="card-body">
-                    <div className="avatar-container">
-                        <img src={sarah} height="124px" width="124px" alt="author avatar" />
-                    </div>
-                    <div className="question-container">
-                        <h5 className="card-title"><b>Would you rather</b></h5>
-                        <p className="card-text">Learn React or ...</p>
-                        <button className="poll-button">View Poll</button>
-                    </div>
-                </div>
+            <div>
+            <ul>
+                <li>
+                    Hello, {this.props.authenticatedUser}!
+                </li>
+                <li>
+                    <button className="logout-button" onClick={this.handleSignOut}>Sign out </button>
+                </li>
+            </ul>
             </div>
-
-            <div className="card">
-                <div className="card-header">
-                    John asks:
-                </div>
-                <div className="card-body">
-                    <div className="avatar-container">
-                        <img src={john} height="124px" width="124px" alt="author avatar" />
-                    </div>
-                    <div className="question-container">
-                        <h5 className="card-title"><b>Would you rather</b></h5>
-                        <p className="card-text">Learn React or ...</p>
-                        <button className="poll-button">View Poll</button>
-                    </div>
-                </div>
-            </div> */}
-        </div>
-    )
+        </nav>
+        )
+    }
 }
+
+const mapDispatchToProps = dispatch => ({
+    setAuthenticatedUser,
+    dispatch
+});
+
+export default connect(null, mapDispatchToProps)(Menu);
