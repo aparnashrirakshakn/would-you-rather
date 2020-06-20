@@ -42,7 +42,9 @@ a {
 
 .result {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .poll-author {
@@ -220,6 +222,13 @@ li {
   }
 }
 
+@media (max-width: 500px) {
+  .user-question-container .card-body {
+    width: 95%;
+    flex-direction: column;
+  }
+}
+
 .add-form {
   margin: 0 auto;
 }
@@ -347,10 +356,6 @@ input {
   margin-top: 0.5rem;
 }
 
-.results-button {
-  background-color: #48A3B8;
-}
-
 .logout-button {
   padding-left: 4rem;
   padding-right: 5rem;
@@ -389,6 +394,7 @@ input {
 
 .percentage-span {
   padding-left: 1rem;
+  font-weight: bold;
 }
 
 .vote-indicator {
@@ -421,6 +427,14 @@ input {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.results-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 @media (max-width: 500px) {

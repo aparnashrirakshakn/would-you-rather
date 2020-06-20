@@ -34,11 +34,11 @@ class Question extends Component {
             <div className="card-header">
               <span>{question.author} asks...</span>
             </div>
-            <div className="card-body col-12 pl-0 pr-0">
-                <div className="avatar-container col-3">
+            <div className="card-body user-question-card col-12 pl-0 pr-0">
+                <div className="avatar-container col-12 col-md-3">
                   <img src={authorAvatar} alt="Author's Avatar" />
                 </div>
-                <div className="question-container col-9">
+                <div className="question-container col-12 col-md-9">
                     <h4>Would you rather</h4>
                     <ul>
                       {['optionOneText', 'optionTwoText'].map((key) => {
@@ -56,14 +56,17 @@ class Question extends Component {
                             : <div className='result'>
                                 {getVotedIndicator(vote, key.slice(0,-4)+'Votes') && 
                                     <div className='vote-indicator'>
-                                      <img src={indicator} alt="Your Vote" className='mr-4 mb-2'/>
+                                      <img src={indicator} alt="Your Vote" className='mb-2'/>
                                       <span>Your vote</span>
                                     </div>
                                 }
                                 <span>{question[key]}</span>
+                                <div className='results-display'>
                                 <span className='percentage-span'>
                                   {getPercentage(count, totalVotes)}%
                                 </span>
+                                <span>{count} of {totalVotes} votes</span>
+                                </div>
                               </div>}
                           </li>
                         )
