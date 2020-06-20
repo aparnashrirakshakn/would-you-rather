@@ -20,24 +20,21 @@ class App extends Component {
         <div>
           <LoadingBar />
           <div className = 'container'>
-            {!this.props.authenticatedUser &&
-              <Route path='/' exact component={Signin} />
-            }
-
-            {this.props.authenticatedUser &&
-              <div>
-                <Menu authenticatedUser={this.props.authenticatedUser}/>
-                {this.props.loading === true
-                  ? null
-                  : <div>
-                      <Route path='/' exact component={Dashboard} />
-                      <Route path='/leaderboard' component={Leaderboard} />
-                      <Route path='/questions/:id' component={Question} />
-                      <Route path='/add' component={AddQuestion} />
-                    </div>
-                }
-              </div>
-            }
+            {!this.props.authenticatedUser ? 
+            <Route path='/' exact component={Signin} /> :
+            <div>
+              <Menu authenticatedUser={this.props.authenticatedUser}/>
+              {this.props.loading === true
+                ? null
+                : <div>
+                    <Route path='/' exact component={Dashboard} />
+                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Route path='/questions/:id' component={Question} />
+                    <Route path='/add' component={AddQuestion} />
+                  </div>
+              }
+            </div>
+            } 
           </div>
         </div>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 import React  from 'react'
 import { connect } from 'react-redux'
+
 function Leaderboard({ users }) {
     return (
         <ul>

@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { setAuthenticatedUser } from '../actions/authenticatedUser'
 import { connect } from "react-redux"
+import { Redirect } from 'react-router'
 
 class Menu extends Component {
+
+    state = {
+        navigate : false
+    }
 
     handleSignOut = (e) => {
         e.preventDefault();
@@ -14,9 +19,18 @@ class Menu extends Component {
         }).then(() => {
             this.props.dispatch(setAuthenticatedUser(selectedUserId))
         });
+        this.setState({
+            navigate: true
+        })
     }
 
     render() {
+        const { navigate } = this.state
+
+        if (navigate) {
+            return <Redirect to='/' push={true} />
+        }
+
         return (
             <nav className='menu'>
             <div>
