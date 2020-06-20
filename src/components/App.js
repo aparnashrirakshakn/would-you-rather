@@ -21,7 +21,7 @@ class App extends Component {
           <LoadingBar />
           <div className = 'container'>
             {!this.props.authenticatedUser ? 
-            <Route path='/' exact component={Signin} /> :
+            <Route path='/' component={Signin} /> :
             <div>
               <Menu authenticatedUser={this.props.authenticatedUser}/>
               {this.props.loading === true
